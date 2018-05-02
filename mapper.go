@@ -60,17 +60,19 @@ func main() {
 	for _, record := range syllabus {
 		scores1, max1, _ := classifier.LogScores(tokenize.TextToWords(record["Outcome"]))
 		scores2, max2, _ := classifier.LogScores(tokenize.TextToWords(record["Content"]))
-		ac := strings.Split(strings.Replace(record["AC content"], "\"", "", -1), ";")
+		ac := strings.Split(strings.Replace(record["AC content"], "\"", "", -1), "; ")
 		ac_match := make(map[bayesian.Class]bool)
 		for _, a := range ac {
 			ac_match[bayesian.Class(a)] = true
 		}
+		//log.Printf("%+v\n", ac_match)
 		fmt.Printf("%s\t", record["Item"])
 		for i := 0; i < len(scores1); i++ {
 			match := ""
 			_, ok := ac_match[classes[i]]
+			//log.Printf(" ---%s: %s--- ", classes[i], ok)
 			if ok {
-				match = "*"
+				match = "%"
 			}
 			is_max1 := ""
 			if i == max1 {
@@ -80,7 +82,7 @@ func main() {
 			if i == max2 {
 				is_max2 = "#"
 			}
-			fmt.Printf("%0.3f%s:%03f%s%s\t", scores1[i], is_max1, scores2[i], is_max2, match)
+			fmt.Printf("%0.3f%s:%0.3f%s%s\t", scores1[i], is_max1, scores2[i], is_max2, match)
 		}
 		fmt.Println()
 	}
