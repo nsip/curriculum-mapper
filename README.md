@@ -5,6 +5,8 @@ NOTE: This is experimental and proof-of-concept code
 
 This tool uses keyword-based document classification to align one curriculum to another curriculum. It identifies distinctive keywords in each source curriculum item text, and uses those as a document classifier. The tool then runs the text of each target curriculum item past the classifier, and extracts scores for how well the target item overlaps in keywords with each source curriculum item. 
 
+Binary distributions of the code are available in the build/ directory.
+
 For somewhat more on the approach taken, see https://github.com/nsip/curriculum-mapper/wiki/Design-Approach
 
 The document classification approach is used in this instance to align curricula, but the documnt classification approach applies to any text; it can just as well be applied to resource descriptions, or to lesson plans.
